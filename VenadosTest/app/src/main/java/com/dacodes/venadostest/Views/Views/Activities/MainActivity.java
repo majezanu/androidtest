@@ -1,5 +1,6 @@
-package com.dacodes.venadostest.Views.Activities;
+package com.dacodes.venadostest.Views.Views.Activities;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,26 +17,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dacodes.venadostest.R;
+import com.dacodes.venadostest.Views.Views.Fragments.DtFragment;
+import com.dacodes.venadostest.Views.Views.Fragments.PlayersFragment;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
+        implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener,
+        DtFragment.OnFragmentInteractionListener{
+    Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -45,6 +42,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
     }
 
     @Override
@@ -88,9 +87,13 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             // Handle the camera action
         } else if (id == R.id.statistics) {
-
+            toolbar.setTitle(R.string.statistics_item);
         } else if (id == R.id.players) {
-
+            setFragment(2);
+            toolbar.setTitle(R.string.players_item);
+        }else if (id == R.id.coaches_menu) {
+            setFragment(3);
+            toolbar.setTitle(R.string.coaches_item);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -116,7 +119,24 @@ public class MainActivity extends AppCompatActivity
                 //fragmentTransaction.commit();
                 break;
             case 2:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                PlayersFragment playersFragment = new PlayersFragment();
+                fragmentTransaction.replace(R.id.content_fragment, playersFragment);
+                fragmentTransaction.commit();
+                break;
+            case 3:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                DtFragment dtFragment = new DtFragment();
+                fragmentTransaction.replace(R.id.content_fragment, dtFragment);
+                fragmentTransaction.commit();
                 break;
         }
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

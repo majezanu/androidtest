@@ -3,12 +3,17 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             tools:context=".Views.Fragments.Players">
+             tools:context=".Views.Views.Fragments.PlayersFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridView
+
+        android:id="@+id/Players_grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+        android:columnWidth="110dp"
+        android:gravity="center"
+        android:numColumns="auto_fit"/>
+
 
 </FrameLayout>

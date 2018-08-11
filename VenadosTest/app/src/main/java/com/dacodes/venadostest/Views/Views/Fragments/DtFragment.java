@@ -1,24 +1,39 @@
-package com.dacodes.venadostest.Views.Fragments;
+package com.dacodes.venadostest.Views.Views.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 
 import com.dacodes.venadostest.R;
+import com.dacodes.venadostest.Views.DtAdapter;
+import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
+import com.dacodes.venadostest.Views.Models.Players.Forward;
+import com.dacodes.venadostest.Views.Models.Players.Player;
+import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
+import com.dacodes.venadostest.Views.Models.Players.Team;
+import com.dacodes.venadostest.Views.PlayersAdapter;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Players.OnFragmentInteractionListener} interface
+ * {@link DtFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Players#newInstance} factory method to
+ * Use the {@link DtFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Players extends Fragment {
+public class DtFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -28,10 +43,17 @@ public class Players extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private GridView gridView;
+    private DtAdapter adapter;
 
-    public Players() {
+    private Team team = new Team();
+    private OnFragmentInteractionListener mListener;
+    View view;
+
+    public DtFragment() {
         // Required empty public constructor
+
+
     }
 
     /**
@@ -40,14 +62,12 @@ public class Players extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Players.
+     * @return A new instance of fragment PlayersFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Players newInstance(String param1, String param2) {
-        Players fragment = new Players();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+    public static DtFragment newInstance(Bundle save) {
+        DtFragment fragment = new DtFragment();
+        Bundle args = save;
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,9 +75,33 @@ public class Players extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Call<PlayerResponse> call = VenadosApiAdapter.getApiService().getPlayers();
+        call.enqueue(new Callback<PlayerResponse>() {
+            @Override
+            public void onResponse(Call<PlayerResponse> call, Response<PlayerResponse> response) {
+                if(!response.isSuccessful() && response.errorBody() != null)
+                {
+
+                }else if(response.body() != null)
+                {
+                    //if(response.body().getCode() == 200)
+                    //{
+                    Log.d("RETFIT", response.body().getData().getTeam().getCenters().get(0).getUrlImage());
+                    //team.setForwards(response.body().getData().getTeam().getForwards());
+                    team = response.body().getData().getTeam();
+                    adapter = new DtAdapter(getActivity().getApplicationContext(),team);
+                    gridView.setAdapter(adapter);
+                    //}
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlayerResponse> call, Throwable t) {
+
+            }
+        });
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -65,7 +109,12 @@ public class Players extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_players, container, false);
+        view = inflater.inflate(R.layout.fragment_players, container, false);
+
+        gridView = (GridView) view.findViewById(R.id.Players_grid);
+
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

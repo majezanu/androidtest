@@ -9,6 +9,8 @@
     <string name="home_item">Home</string>
     <string name="statistics_item">Estadísticas</string>
     <string name="players_item">Jugadores</string>
+    <string name="coaches_item">Cuerpo Técnico</string>
+    <string name="group_team_menu">Equipo</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

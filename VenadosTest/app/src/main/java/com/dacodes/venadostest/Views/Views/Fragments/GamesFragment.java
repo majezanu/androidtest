@@ -1,4 +1,4 @@
-package com.dacodes.venadostest.Views.Fragments;
+package com.dacodes.venadostest.Views.Views.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,12 +13,12 @@ import com.dacodes.venadostest.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Games.OnFragmentInteractionListener} interface
+ * {@link GamesFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Games#newInstance} factory method to
+ * Use the {@link GamesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Games extends Fragment {
+public class GamesFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class Games extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Games() {
+    public GamesFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class Games extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Games.
+     * @return A new instance of fragment GamesFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Games newInstance(String param1, String param2) {
-        Games fragment = new Games();
+    public static GamesFragment newInstance(String param1, String param2) {
+        GamesFragment fragment = new GamesFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

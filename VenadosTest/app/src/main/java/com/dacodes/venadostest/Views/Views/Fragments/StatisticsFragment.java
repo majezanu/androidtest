@@ -1,4 +1,4 @@
-package com.dacodes.venadostest.Views.Fragments;
+package com.dacodes.venadostest.Views.Views.Fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,12 +13,12 @@ import com.dacodes.venadostest.R;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Statistics.OnFragmentInteractionListener} interface
+ * {@link StatisticsFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Statistics#newInstance} factory method to
+ * Use the {@link StatisticsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Statistics extends Fragment {
+public class StatisticsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,7 +30,7 @@ public class Statistics extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public Statistics() {
+    public StatisticsFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +40,11 @@ public class Statistics extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Statistics.
+     * @return A new instance of fragment StatisticsFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Statistics newInstance(String param1, String param2) {
-        Statistics fragment = new Statistics();
+    public static StatisticsFragment newInstance(String param1, String param2) {
+        StatisticsFragment fragment = new StatisticsFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
