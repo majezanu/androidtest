@@ -6,4 +6,10 @@
     <string name="nav_header_subtitle">By: Manuel Zavala</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="home_item">Home</string>
+    <string name="statistics_item">Estadísticas</string>
+    <string name="players_item">Jugadores</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
