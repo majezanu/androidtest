@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <TextView
+        android:id="@+id/players_details_tv"
+        android:text="@string/player_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="15dp"/>
+    <ImageView
+        android:id="@+id/Player_image_d"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp" />
+    <TextView
+        android:id="@+id/player_name_d"
+        android:text="@string/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        />
+    <TextView
+        android:id="@+id/player_position_d"
+        android:text="@string/position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:id="@+id/birthdate_tv"
+        android:text="@string/birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        />
+    <TextView
+        android:id="@+id/birthdate_tv_d"
+        android:text="@string/birthdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:id="@+id/birthplace_tv"
+        android:text="@string/birthplace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        />
+    <TextView
+        android:id="@+id/birthplace_tv_d"
+        android:text="@string/birthplace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:id="@+id/weight_tv"
+        android:text="@string/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        />
+    <TextView
+        android:id="@+id/weight_tv_d"
+        android:text="@string/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:id="@+id/height_tv"
+        android:text="@string/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        />
+    <TextView
+        android:id="@+id/height_tv_d"
+        android:text="@string/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dp"/>
+    <TextView
+        android:id="@+id/last_team_tv"
+        android:text="@string/last_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        />
+    <TextView
+        android:id="@+id/last_team_tv_d"
+        android:text="@string/last_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:paddingBottom="15dp"/>
+
+</LinearLayout>
+</ScrollView>

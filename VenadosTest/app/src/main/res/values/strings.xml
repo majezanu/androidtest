@@ -1,4 +1,12 @@
 <resources>
+    <string name="player_details">FICHA TÉCNICA</string>
+    <string name="name">NOMBRE(p)</string>
+    <string name="position">POSICIÓN(p)</string>
+    <string name="birthdate">FECHA DE NACIMIENTO</string>
+    <string name="birthplace">LUGAR DE NACIMIENTO</string>
+    <string name="weight">PESO</string>
+    <string name="height">ALTURA</string>
+    <string name="last_team">EQUIPO ANTERIOR</string>
     <string name="app_name">Venados F.C.</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -16,6 +24,5 @@
     <string name="coaches_item">Cuerpo Técnico</string>
     <string name="group_team_menu">Equipo</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

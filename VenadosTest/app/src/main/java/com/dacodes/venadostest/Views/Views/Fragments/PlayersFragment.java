@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.dacodes.venadostest.R;
@@ -20,6 +23,7 @@ import com.dacodes.venadostest.Views.DtAdapter;
 import com.dacodes.venadostest.Views.ForwardsAdapter;
 import com.dacodes.venadostest.Views.GoalKeeperAdapter;
 import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
+import com.dacodes.venadostest.Views.Models.Players.Coach;
 import com.dacodes.venadostest.Views.Models.Players.Forward;
 import com.dacodes.venadostest.Views.Models.Players.Player;
 import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
@@ -44,10 +48,13 @@ public class PlayersFragment extends Fragment {
 
     private static final String TEAM_ID = "Team_ID";
     private static final String CASO_ID = "Caso_ID";
+    private static final String PLAYER_ID = "PLAYER_ID";
     // TODO: Rename and change types of parameters
     private Team team;
 
     private GridView gridView;
+
+    private BottomNavigationView navegacion;
 
     private ForwardsAdapter adapter_forwards;
     private CentersAdapter adapter_centers;
@@ -96,6 +103,7 @@ public class PlayersFragment extends Fragment {
 
     };
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,11 +113,11 @@ public class PlayersFragment extends Fragment {
             if(getActivity().getApplicationContext() != null)
             {
 
-                adapter_forwards = new ForwardsAdapter(getActivity().getApplicationContext(),team);
-                adapter_centers = new CentersAdapter(getActivity().getApplicationContext(),team);
-                adapter_defenses = new DefensesAdapter(getActivity().getApplicationContext(),team);
-                adapter_goalKeeper = new GoalKeeperAdapter(getActivity().getApplicationContext(),team);
-                adapter_coaches = new DtAdapter(getActivity().getApplicationContext(),team);
+                adapter_forwards = new ForwardsAdapter(getActivity().getApplicationContext(),team,getActivity().getSupportFragmentManager());
+                adapter_centers = new CentersAdapter(getActivity().getApplicationContext(),team,getActivity().getSupportFragmentManager());
+                adapter_defenses = new DefensesAdapter(getActivity().getApplicationContext(),team,getActivity().getSupportFragmentManager());
+                adapter_goalKeeper = new GoalKeeperAdapter(getActivity().getApplicationContext(),team,getActivity().getSupportFragmentManager());
+                adapter_coaches = new DtAdapter(getActivity().getApplicationContext(),team, getActivity().getSupportFragmentManager());
             }
 
         }
@@ -120,9 +128,11 @@ public class PlayersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_players, container, false);
-        gridView = (GridView) view.findViewById(R.id.Players_grid);
+        gridView = view.findViewById(R.id.Players_grid);
         gridView.setAdapter(adapter_forwards);
-        BottomNavigationView navegacion = (BottomNavigationView) view.findViewById(R.id.navigation);
+
+        navegacion = view.findViewById(R.id.navigation);
+
         navegacion.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
@@ -166,5 +176,12 @@ public class PlayersFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void showDialog(Bundle bundle) {
+        //FragmentManager fm = getSupportFragmentManager();
+        PlayerDetailsFragment p = PlayerDetailsFragment.newInstance(bundle);
+        p.show(getActivity().getSupportFragmentManager(),"players_dialog_fragment");
+
     }
 }

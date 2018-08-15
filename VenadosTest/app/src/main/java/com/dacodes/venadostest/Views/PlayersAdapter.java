@@ -17,7 +17,7 @@ import com.dacodes.venadostest.Views.Models.Players.Team;
 import com.dacodes.venadostest.Views.Views.Miscellanius.PicassoCircleTransformation;
 import com.squareup.picasso.Picasso;
 
-public class PlayersAdapter extends BaseAdapter {
+public class PlayersAdapter extends BaseAdapter implements View.OnClickListener {
     private Context context;
     private Team team;
 
@@ -65,5 +65,10 @@ public class PlayersAdapter extends BaseAdapter {
 
 
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

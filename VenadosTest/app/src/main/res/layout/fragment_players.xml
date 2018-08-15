@@ -7,7 +7,6 @@
              xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".Views.Views.Fragments.PlayersFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <GridView
         android:id="@+id/Players_grid"
         android:layout_width="match_parent"
@@ -16,12 +15,15 @@
         android:columnWidth="110dp"
         android:gravity="center"
         android:numColumns="auto_fit"/>
+
     <android.support.design.widget.BottomNavigationView
+
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         app:menu="@menu/players_bottom_nav"/>
+
 
 
 

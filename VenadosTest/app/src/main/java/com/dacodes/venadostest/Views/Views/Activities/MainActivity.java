@@ -16,8 +16,11 @@ import android.view.MenuItem;
 
 import com.dacodes.venadostest.R;
 import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
+import com.dacodes.venadostest.Views.Models.Players.Coach;
 import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
 import com.dacodes.venadostest.Views.Models.Players.Team;
+import com.dacodes.venadostest.Views.Views.Fragments.CoachDetailsFragment;
+import com.dacodes.venadostest.Views.Views.Fragments.PlayerDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayersFragment;
 
 import retrofit2.Call;
@@ -25,7 +28,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener,
+        PlayerDetailsFragment.OnFragmentInteractionListener, CoachDetailsFragment.OnFragmentInteractionListener{
     Toolbar toolbar;
     Bundle bundle = new Bundle();
     private static final String TEAM_ID = "Team_ID";

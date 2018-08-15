@@ -1,6 +1,8 @@
 package com.dacodes.venadostest.Views;
 
+import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +14,21 @@ import com.dacodes.venadostest.R;
 import com.dacodes.venadostest.Views.Models.Players.Coach;
 import com.dacodes.venadostest.Views.Models.Players.Player;
 import com.dacodes.venadostest.Views.Models.Players.Team;
+import com.dacodes.venadostest.Views.Views.Fragments.CoachDetailsFragment;
+import com.dacodes.venadostest.Views.Views.Fragments.PlayerDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Miscellanius.PicassoCircleTransformation;
 import com.squareup.picasso.Picasso;
 
 public class DtAdapter extends BaseAdapter {
     private Context context;
     private Team team;
+    private FragmentManager f;
+    private static final String coach_ID = "coach_ID";
 
-    public DtAdapter(Context context, Team t) {
+    public DtAdapter(Context context, Team t, FragmentManager fm) {
         this.context = context;
         this.team = t;
+        this.f = fm;
     }
 
     @Override
@@ -58,6 +65,19 @@ public class DtAdapter extends BaseAdapter {
                 .into(imagePlayer);
         positionPlayer.setText(item.getRole());
         namePlayer.setText(item.getName());
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle b = new Bundle();
+                b.putSerializable(coach_ID, item);
+                showDialog(b);
+            }
+        });
         return view;
+    }
+    private void showDialog(Bundle bundle) {
+        //FragmentManager fm = getSupportFragmentManager();
+        CoachDetailsFragment p = CoachDetailsFragment.newInstance(bundle);
+        p.show(f, "players_dialog_fragment");
     }
 }
