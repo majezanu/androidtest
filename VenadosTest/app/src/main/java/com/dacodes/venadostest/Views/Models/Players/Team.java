@@ -2,9 +2,10 @@ package com.dacodes.venadostest.Views.Models.Players;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Team {
+public class Team implements Serializable {
     @SerializedName("forwards")
     private ArrayList<Forward> forwards = new ArrayList<>();
     @SerializedName("centers")

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/forwards"
+        android:icon="@drawable/ic_forwards"
+        android:title="@string/Forwards"/>
+    <item
+        android:id="@+id/centers"
+        android:icon="@drawable/ic_centers"
+        android:title="@string/Centers"/>
+    <item
+        android:id="@+id/defenses"
+        android:icon="@drawable/ic_defenses"
+        android:title="@string/Defenses"/>
+    <item
+        android:id="@+id/goalKeepers"
+        android:icon="@drawable/ic_goalkeeper2"
+        android:title="@string/GoalKeeper"/>
+    <item
+        android:id="@+id/coaches_menu"
+        android:icon="@drawable/ic_coach_y"
+        android:title="@string/coaches_item"/>
+</menu>

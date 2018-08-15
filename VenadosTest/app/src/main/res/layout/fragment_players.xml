@@ -1,19 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+              android:orientation="vertical"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              tools:context=".Views.Views.Fragments.PlayersFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <GridView
-
         android:id="@+id/Players_grid"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:columnWidth="110dp"
         android:gravity="center"
         android:numColumns="auto_fit"/>
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:menu="@menu/players_bottom_nav"/>
 
 
-</FrameLayout>
+
+</LinearLayout>

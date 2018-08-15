@@ -12,18 +12,12 @@
             android:id="@+id/statistics"
             android:icon="@drawable/ic_statistics_g"
             android:title="@string/statistics_item"/>
-        <item android:title="@string/group_team_menu">
-            <menu>
+
                 <item
                     android:id="@+id/players"
                     android:icon="@drawable/ic_players_g"
-                    android:title="@string/players_item"/>
-                <item
-                    android:id="@+id/coaches_menu"
-                    android:icon="@drawable/ic_coach_y"
-                    android:title="@string/coaches_item"/>
-            </menu>
-            </item>
+                    android:title="@string/group_team_menu"/>
+
 
 
 

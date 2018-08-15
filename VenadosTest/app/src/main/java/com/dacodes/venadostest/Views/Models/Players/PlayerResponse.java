@@ -2,9 +2,10 @@ package com.dacodes.venadostest.Views.Models.Players;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PlayerResponse {
+public class PlayerResponse implements Serializable{
     @SerializedName("sucess")
     private boolean succes;
     @SerializedName("data")

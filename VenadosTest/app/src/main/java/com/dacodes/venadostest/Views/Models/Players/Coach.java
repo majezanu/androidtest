@@ -2,7 +2,9 @@ package com.dacodes.venadostest.Views.Models.Players;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Coach extends Person {
+import java.io.Serializable;
+
+public class Coach extends Person implements Serializable{
     @SerializedName("role")
     private String role;
     @SerializedName("role_short")

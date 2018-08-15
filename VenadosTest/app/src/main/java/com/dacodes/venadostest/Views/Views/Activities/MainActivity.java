@@ -2,11 +2,9 @@ package com.dacodes.venadostest.Views.Views.Activities;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
+import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,22 +15,56 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dacodes.venadostest.R;
-import com.dacodes.venadostest.Views.Views.Fragments.DtFragment;
+import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
+import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
+import com.dacodes.venadostest.Views.Models.Players.Team;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayersFragment;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener,
-        DtFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener{
     Toolbar toolbar;
+    Bundle bundle = new Bundle();
+    private static final String TEAM_ID = "Team_ID";
+    private static final String CASO_ID = "Caso_ID";
+
+    Team team = new Team();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(savedInstanceState == null)
+        {
+            Call<PlayerResponse> call = VenadosApiAdapter.getApiService().getPlayers();
+            call.enqueue(new Callback<PlayerResponse>() {
+                @Override
+                public void onResponse(Call<PlayerResponse> call, Response<PlayerResponse> response) {
+                    if(!response.isSuccessful() && response.errorBody() != null)
+                    {
+
+                    }else if(response.body() != null)
+                    {
+                        Log.d("RETFIT", response.body().getData().getTeam().getCenters().get(0).getUrlImage());
+                        team = response.body().getData().getTeam();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<PlayerResponse> call, Throwable t) {
+
+                }
+            });
+
+        }else
+        {
+            team = (Team)savedInstanceState.getSerializable(TEAM_ID);
+        }
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -88,19 +120,20 @@ public class MainActivity extends AppCompatActivity
             // Handle the camera action
         } else if (id == R.id.statistics) {
             toolbar.setTitle(R.string.statistics_item);
-        } else if (id == R.id.players) {
-            setFragment(2);
-            toolbar.setTitle(R.string.players_item);
-        }else if (id == R.id.coaches_menu) {
-            setFragment(3);
-            toolbar.setTitle(R.string.coaches_item);
+        } else if (id == R.id.players)
+        {
+            bundle.putSerializable(TEAM_ID, team);
+            setFragment(2,bundle);
+            toolbar.setTitle(R.string.group_team_menu);
+
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public void setFragment(int position) {
+    public void setFragment(int position, Bundle args) {
         FragmentManager fragmentManager;
         FragmentTransaction fragmentTransaction;
         switch (position) {
@@ -121,18 +154,24 @@ public class MainActivity extends AppCompatActivity
             case 2:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                PlayersFragment playersFragment = new PlayersFragment();
+                PlayersFragment playersFragment = PlayersFragment.newInstance(args);
                 fragmentTransaction.replace(R.id.content_fragment, playersFragment);
                 fragmentTransaction.commit();
                 break;
-            case 3:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                DtFragment dtFragment = new DtFragment();
-                fragmentTransaction.replace(R.id.content_fragment, dtFragment);
-                fragmentTransaction.commit();
-                break;
+
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable(TEAM_ID, team);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        team = (Team)savedInstanceState.getSerializable(TEAM_ID);
     }
 
     @Override

@@ -2,7 +2,9 @@ package com.dacodes.venadostest.Views.Models.Players;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable{
     @SerializedName("name")
     private String name;
     @SerializedName("first_surname")

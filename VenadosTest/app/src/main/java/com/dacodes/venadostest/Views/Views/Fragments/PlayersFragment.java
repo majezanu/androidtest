@@ -3,14 +3,22 @@ package com.dacodes.venadostest.Views.Views.Fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.dacodes.venadostest.R;
+import com.dacodes.venadostest.Views.CentersAdapter;
+import com.dacodes.venadostest.Views.DefensesAdapter;
+import com.dacodes.venadostest.Views.DtAdapter;
+import com.dacodes.venadostest.Views.ForwardsAdapter;
+import com.dacodes.venadostest.Views.GoalKeeperAdapter;
 import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
 import com.dacodes.venadostest.Views.Models.Players.Forward;
 import com.dacodes.venadostest.Views.Models.Players.Player;
@@ -33,78 +41,76 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class PlayersFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
+    private static final String TEAM_ID = "Team_ID";
+    private static final String CASO_ID = "Caso_ID";
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Team team;
 
     private GridView gridView;
-    private PlayersAdapter adapter;
-    private Player player = new Player("Manuel Jesús","Zavala","Nuñez","1984-11-17T00:00:00+00:00","Mérida",92,1.65,"Defensa",25,"DF","Pachuca","https://venados.dacodes.mx/img/usr/673895a1f78d4bdaa50956cc03df84e4.jpg");
-    private Player player2 = new Player("Manuel Jesús","Zavala","Nuñez","1984-11-17T00:00:00+00:00","Mérida",92,1.65,"Delantero",25,"DF","Pachuca","https://venados.dacodes.mx/img/usr/673895a1f78d4bdaa50956cc03df84e4.jpg");
 
-    private Forward forward = new Forward(player);
-    private Forward forward2 = new Forward(player2);
-    private ArrayList<Forward> forwards = new ArrayList<>();
-    private Team team = new Team();
+    private ForwardsAdapter adapter_forwards;
+    private CentersAdapter adapter_centers;
+    private DefensesAdapter adapter_defenses;
+    private GoalKeeperAdapter adapter_goalKeeper;
+    private DtAdapter adapter_coaches;
     private OnFragmentInteractionListener mListener;
-    View view;
+    private View view;
 
-    public PlayersFragment() {
-        // Required empty public constructor
-
-
+    public PlayersFragment()
+    {
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment PlayersFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static PlayersFragment newInstance(Bundle save) {
+    public static PlayersFragment newInstance(Bundle save)
+    {
         PlayersFragment fragment = new PlayersFragment();
-        Bundle args = save;
-        fragment.setArguments(args);
+        if(save != null)
+        {
+            fragment.setArguments(save);
+        }
         return fragment;
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.forwards:
+                    gridView.setAdapter(adapter_forwards);
+                    return true;
+                case R.id.centers:
+                    gridView.setAdapter(adapter_centers);
+                    return true;
+                case R.id.defenses:
+                    gridView.setAdapter(adapter_defenses);
+                    return true;
+                case R.id.goalKeepers:
+                    gridView.setAdapter(adapter_goalKeeper);
+                    return true;
+                case R.id.coaches_menu:
+                    gridView.setAdapter(adapter_coaches);
+                    return true;
+            }
+            return false;
+        }
+
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Call<PlayerResponse> call = VenadosApiAdapter.getApiService().getPlayers();
-        call.enqueue(new Callback<PlayerResponse>() {
-            @Override
-            public void onResponse(Call<PlayerResponse> call, Response<PlayerResponse> response) {
-                if(!response.isSuccessful() && response.errorBody() != null)
-                {
 
-                }else if(response.body() != null)
-                {
-                    //if(response.body().getCode() == 200)
-                    //{
-                    Log.d("RETFIT", response.body().getData().getTeam().getCenters().get(0).getUrlImage());
-                    //team.setForwards(response.body().getData().getTeam().getForwards());
-                    team = response.body().getData().getTeam();
-                    adapter = new PlayersAdapter(getActivity().getApplicationContext(),team);
-                    gridView.setAdapter(adapter);
-                    //}
-                }
-            }
-
-            @Override
-            public void onFailure(Call<PlayerResponse> call, Throwable t) {
-
-            }
-        });
         if (getArguments() != null) {
+            team = (Team) getArguments().getSerializable(TEAM_ID);
+            if(getActivity().getApplicationContext() != null)
+            {
+
+                adapter_forwards = new ForwardsAdapter(getActivity().getApplicationContext(),team);
+                adapter_centers = new CentersAdapter(getActivity().getApplicationContext(),team);
+                adapter_defenses = new DefensesAdapter(getActivity().getApplicationContext(),team);
+                adapter_goalKeeper = new GoalKeeperAdapter(getActivity().getApplicationContext(),team);
+                adapter_coaches = new DtAdapter(getActivity().getApplicationContext(),team);
+            }
 
         }
     }
@@ -114,8 +120,10 @@ public class PlayersFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_players, container, false);
-
         gridView = (GridView) view.findViewById(R.id.Players_grid);
+        gridView.setAdapter(adapter_forwards);
+        BottomNavigationView navegacion = (BottomNavigationView) view.findViewById(R.id.navigation);
+        navegacion.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
 
         return view;

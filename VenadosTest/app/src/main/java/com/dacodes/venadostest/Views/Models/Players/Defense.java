@@ -1,6 +1,8 @@
 package com.dacodes.venadostest.Views.Models.Players;
 
-public class Defense extends Player {
+import java.io.Serializable;
+
+public class Defense extends Player implements Serializable{
     public Defense(Player p) {
         super(p);
     }

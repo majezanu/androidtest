@@ -1,6 +1,8 @@
 package com.dacodes.venadostest.Views.Models.Players;
 
-public class Forward extends Player {
+import java.io.Serializable;
+
+public class Forward extends Player implements Serializable{
     public Forward(Player p) {
         super(p);
     }
