@@ -10,6 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,13 +71,21 @@ public class PlayerDetailsFragment extends DialogFragment {
             lastTeam_s = player.getLastTeam();
             url_s = player.getUrlImage();
         }
-        return super.onCreateDialog(savedInstanceState);
+
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Hola);
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.setTitle(R.string.player_details);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        return dialog;
+
 
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //setStyle(DialogFragment.STYLE_NO_TITLE, R.style.dialog);
 
     }
 
@@ -84,7 +93,7 @@ public class PlayerDetailsFragment extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.players_dialog_fragment, container, false);
-        
+
         name = view.findViewById(R.id.player_name_d);
         name.setText(name_s);
 

@@ -1,4 +1,8 @@
 <resources>
+    <string name="statistics_table">Tabla General</string>
+    <string name="games_played">JJ</string>
+    <string name="score_diff">DG</string>
+    <string name="points">PTS</string>
     <string name="player_details">FICHA TÉCNICA</string>
     <string name="name">NOMBRE(p)</string>
     <string name="position">POSICIÓN(p)</string>

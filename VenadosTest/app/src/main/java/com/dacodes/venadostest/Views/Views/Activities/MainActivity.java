@@ -19,9 +19,14 @@ import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
 import com.dacodes.venadostest.Views.Models.Players.Coach;
 import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
 import com.dacodes.venadostest.Views.Models.Players.Team;
+import com.dacodes.venadostest.Views.Models.Statistics.DataStatistics;
+import com.dacodes.venadostest.Views.Models.Statistics.Statistic;
+import com.dacodes.venadostest.Views.Models.Statistics.StatisticsResponse;
 import com.dacodes.venadostest.Views.Views.Fragments.CoachDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayerDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayersFragment;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,9 +38,11 @@ public class MainActivity extends AppCompatActivity
     Toolbar toolbar;
     Bundle bundle = new Bundle();
     private static final String TEAM_ID = "Team_ID";
+    private static final String STATISTICS_ID = "STATISTICS_ID";
     private static final String CASO_ID = "Caso_ID";
 
     Team team = new Team();
+    ArrayList<Statistic> statistics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(savedInstanceState == null)
@@ -60,9 +67,31 @@ public class MainActivity extends AppCompatActivity
                 }
             });
 
+            Call<StatisticsResponse> call2 = VenadosApiAdapter.getApiService().getStatisticsResponse();
+            call2.enqueue(new Callback<StatisticsResponse>() {
+                @Override
+                public void onResponse(Call<StatisticsResponse> call, Response<StatisticsResponse> response) {
+                    if(!response.isSuccessful() && response.errorBody() != null)
+                    {
+
+                    }else if(response.body() != null)
+                    {
+                       statistics = response.body().getData().getStatistics();
+                        Log.d("RETFIT", statistics.get(1).getTeam());
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<StatisticsResponse> call, Throwable t) {
+
+                }
+            });
+
         }else
         {
             team = (Team)savedInstanceState.getSerializable(TEAM_ID);
+            statistics = (ArrayList)savedInstanceState.getSerializable(STATISTICS_ID);
         }
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
@@ -170,12 +199,14 @@ public class MainActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(TEAM_ID, team);
+        outState.putSerializable(STATISTICS_ID,statistics);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         team = (Team)savedInstanceState.getSerializable(TEAM_ID);
+        statistics = (ArrayList)savedInstanceState.getSerializable(STATISTICS_ID);
     }
 
     @Override

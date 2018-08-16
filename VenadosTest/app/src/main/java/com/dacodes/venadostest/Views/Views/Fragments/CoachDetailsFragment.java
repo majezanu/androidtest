@@ -72,7 +72,11 @@ public class CoachDetailsFragment extends DialogFragment {
             lastTeam_s = "No disponible";
             url_s = coach.getUrlImage();
         }
-        return super.onCreateDialog(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.Hola);
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.setTitle(R.string.player_details);
+        dialog.setCanceledOnTouchOutside(true);
+        return dialog;
 
     }
 

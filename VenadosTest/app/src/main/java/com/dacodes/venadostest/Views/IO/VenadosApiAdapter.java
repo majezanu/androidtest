@@ -1,5 +1,7 @@
 package com.dacodes.venadostest.Views.IO;
 
+import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -22,6 +24,7 @@ public class VenadosApiAdapter {
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build()) // <-- usamos el log level
+                    //.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
             API_SERVICE = retrofit.create(VenadosApiService.class);
         }
