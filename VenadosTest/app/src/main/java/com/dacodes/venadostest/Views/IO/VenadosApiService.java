@@ -1,5 +1,6 @@
 package com.dacodes.venadostest.Views.IO;
 
+import com.dacodes.venadostest.Views.Models.Games.GamesResponse;
 import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
 import com.dacodes.venadostest.Views.Models.Statistics.StatisticsResponse;
 
@@ -16,4 +17,8 @@ public interface VenadosApiService {
     @Headers( {"Accept: application/json" })
     @GET("statistics")
     Call<StatisticsResponse> getStatisticsResponse();
+
+    @Headers( {"Accept: application/json" })
+    @GET("games")
+    Call<GamesResponse> getGamesResponse();
 }

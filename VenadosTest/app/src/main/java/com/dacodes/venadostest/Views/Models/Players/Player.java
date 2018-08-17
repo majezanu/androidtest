@@ -16,6 +16,9 @@ public class Player extends Person implements Serializable{
     @SerializedName("image")
     private String urlImage;
 
+    public Player() {
+    }
+
     public Player(Player P) {
         super(P);
         this.position = P.getPosition();

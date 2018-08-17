@@ -3,6 +3,9 @@ package com.dacodes.venadostest.Views.Models.Players;
 import java.io.Serializable;
 
 public class GoalKeeper extends Player implements Serializable{
+    public GoalKeeper() {
+    }
+
     public GoalKeeper(Player p) {
         super(p);
     }

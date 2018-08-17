@@ -3,6 +3,9 @@ package com.dacodes.venadostest.Views.Models.Players;
 import java.io.Serializable;
 
 public class Center extends Player implements Serializable {
+    public Center() {
+    }
+
     public Center(Player p) {
         super(p);
     }

@@ -46,7 +46,8 @@
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
                                       <entry key="imageAsset" value="D:\repos\AndroidTest\Resources\logo_b.png" />
-                                      <entry key="outputName" value="icon_action_name" />
+                                      <entry key="outputName" value="icon_action" />
+                                      <entry key="theme" value="CUSTOM" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -123,7 +124,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputIconType" value="NOTIFICATION" />
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>
@@ -160,8 +161,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_defenses" />
-                            <entry key="sourceFile" value="D:\repos\AndroidTest\Resources\defenses2.svg" />
+                            <entry key="outputName" value="ic_calendar" />
+                            <entry key="sourceFile" value="D:\repos\AndroidTest\Resources\calendar2.svg" />
                           </map>
                         </option>
                       </PersistentState>

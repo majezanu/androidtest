@@ -1,8 +1,15 @@
 package com.dacodes.venadostest.Views.Models.Players;
 
+import android.util.Log;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class Person implements Serializable{
     @SerializedName("name")
@@ -19,6 +26,13 @@ public class Person implements Serializable{
     private double weight;
     @SerializedName("height")
     private double height;
+
+    private Date date;
+
+    private SimpleDateFormat dateFormatFull =
+            new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss+SS:SS", Locale.getDefault());
+    private DateFormat dateFormat =
+            new SimpleDateFormat("dd/MM/yyyy", Locale.forLanguageTag("es-ES"));
 
     public Person() {
     }
@@ -96,5 +110,27 @@ public class Person implements Serializable{
 
     public void setHeight(double height) {
         this.height = height;
+    }
+
+    public String getDateReformated() {
+        try {
+            setDate(dateFormatFull.parse(this.birthday));
+            Log.d("Date", this.birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return dateFormat.format(date);
+    }
+    public Date getDate() {
+        try {
+            setDate(dateFormatFull.parse(this.birthday));
+            Log.d("Date", this.birthday);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,8 @@ import android.view.MenuItem;
 
 import com.dacodes.venadostest.R;
 import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
+import com.dacodes.venadostest.Views.Models.Games.DataGames;
+import com.dacodes.venadostest.Views.Models.Games.GamesResponse;
 import com.dacodes.venadostest.Views.Models.Players.Coach;
 import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
 import com.dacodes.venadostest.Views.Models.Players.Team;
@@ -23,6 +26,7 @@ import com.dacodes.venadostest.Views.Models.Statistics.DataStatistics;
 import com.dacodes.venadostest.Views.Models.Statistics.Statistic;
 import com.dacodes.venadostest.Views.Models.Statistics.StatisticsResponse;
 import com.dacodes.venadostest.Views.Views.Fragments.CoachDetailsFragment;
+import com.dacodes.venadostest.Views.Views.Fragments.GamesFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayerDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayersFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.StatisticsFragment;
@@ -36,19 +40,44 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener,
         PlayerDetailsFragment.OnFragmentInteractionListener, CoachDetailsFragment.OnFragmentInteractionListener,
-        StatisticsFragment.OnFragmentInteractionListener{
+        StatisticsFragment.OnFragmentInteractionListener, GamesFragment.OnFragmentInteractionListener{
     Toolbar toolbar;
     Bundle bundle = new Bundle();
+    private DrawerLayout drawer;
+    private ActionBarDrawerToggle toggle;
+    private NavigationView navigationView;
+
     private static final String TEAM_ID = "Team_ID";
     private static final String STATISTICS_ID = "STATISTICS_ID";
+    private static final String GaMES_ID = "GAMES_ID";
     private static final String CASO_ID = "Caso_ID";
 
     Team team = new Team();
     DataStatistics dataStatistics = new DataStatistics();
+    DataGames dataGames = new DataGames();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(savedInstanceState == null)
         {
+            Call<GamesResponse> call0 = VenadosApiAdapter.getApiService().getGamesResponse();
+            call0.enqueue(new Callback<GamesResponse>() {
+                @Override
+                public void onResponse(Call<GamesResponse> call, Response<GamesResponse> response) {
+                    if(!response.isSuccessful() && response.errorBody() != null)
+                    {
+
+                    }else if(response.body() != null)
+                    {
+                        Log.d("RETFIT", response.body().getData().getGames().get(1).getDateReformated());
+                        dataGames = response.body().getData();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<GamesResponse> call, Throwable t) {
+
+                }
+            });
             Call<PlayerResponse> call = VenadosApiAdapter.getApiService().getPlayers();
             call.enqueue(new Callback<PlayerResponse>() {
                 @Override
@@ -101,13 +130,14 @@ public class MainActivity extends AppCompatActivity
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
 
@@ -152,13 +182,23 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.home) {
-            // Handle the camera action
+
+           //getSupportActionBar().hide();
+           // getSupportActionBar().setCustomView(R.layout.fragment_games);
+            //getSupportActionBar().setDisplayShowCustomEnabled(true);
+            //getSupportActionBar().show();
+            bundle.putSerializable(GaMES_ID,dataGames);
+            setFragment(0,bundle);
         } else if (id == R.id.statistics) {
+            //setSupportActionBar(toolbar);
+
             bundle.putSerializable(STATISTICS_ID, dataStatistics);
             toolbar.setTitle(R.string.statistics_item);
             setFragment(1, bundle);
         } else if (id == R.id.players)
         {
+
+            //setSupportActionBar(toolbar);
             bundle.putSerializable(TEAM_ID, team);
             setFragment(2,bundle);
             toolbar.setTitle(R.string.group_team_menu);
@@ -175,11 +215,11 @@ public class MainActivity extends AppCompatActivity
         FragmentTransaction fragmentTransaction;
         switch (position) {
             case 0:
-                //fragmentManager = getSupportFragmentManager();
-                //fragmentTransaction = fragmentManager.beginTransaction();
-                //InboxFragment inboxFragment = new InboxFragment();
-                //fragmentTransaction.replace(R.id.fragment, inboxFragment);
-                //fragmentTransaction.commit();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                GamesFragment gamesFragment = GamesFragment.newInstance(args);
+                fragmentTransaction.replace(R.id.content_fragment, gamesFragment);
+                fragmentTransaction.commit();
                 break;
             case 1:
                 fragmentManager = getSupportFragmentManager();

@@ -64,7 +64,7 @@ public class PlayerDetailsFragment extends DialogFragment {
             player = (Player)getArguments().getSerializable(PLAYER_ID);
             name_s = player.getName()+" "+player.getFirstSurName()+" "+ player.getSecondSurName();
             position_s = player.getPosition();
-            birthdate_s = player.getBirthday();
+            birthdate_s = player.getDateReformated();
             birthplace_s = player.getBirthPlace();
             weight_s = String.valueOf(player.getWeight());
             height_s = String.valueOf(player.getHeight());

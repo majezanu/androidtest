@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <android.support.v7.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/games_cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <TableLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <TableRow
+                android:layout_gravity="center"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="68dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <ImageButton
+                        android:id="@+id/calendar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white"
+                        android:src="@drawable/ic_calendar"/>
+
+
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"/>
+
+                    <TextView
+                        android:id="@+id/day"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/local"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/home_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Venados FC"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/home_score"
+                        android:layout_width="54dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1"/>
+
+                    <TextView
+                        android:id="@+id/diag"
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="-"/>
+
+                    <TextView
+                        android:id="@+id/away-score"
+                        android:layout_width="33dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="2"/>
+                </LinearLayout>
+
+
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="68dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:id="@+id/visitor_image"
+                        android:layout_width="54dp"
+                        android:layout_height="54dp"
+                        android:gravity="center"/>
+
+                    <TextView
+                        android:id="@+id/visitor_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Venados FC"/>
+                </LinearLayout>
+
+
+
+            </TableRow>
+        </TableLayout>
+
+    </android.support.v7.widget.CardView>

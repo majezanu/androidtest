@@ -65,7 +65,7 @@ public class CoachDetailsFragment extends DialogFragment {
             coach = (Coach)getArguments().getSerializable(coach_ID);
             name_s = coach.getName()+" "+coach.getFirstSurName()+" "+ coach.getSecondSurName();
             position_s = coach.getRole();
-            birthdate_s = coach.getBirthday();
+            birthdate_s = coach.getDateReformated();
             birthplace_s = coach.getBirthPlace();
             weight_s = String.valueOf(coach.getWeight());
             height_s = String.valueOf(coach.getHeight());
