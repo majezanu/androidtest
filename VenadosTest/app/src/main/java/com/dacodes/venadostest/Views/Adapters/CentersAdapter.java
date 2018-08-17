@@ -1,4 +1,4 @@
-package com.dacodes.venadostest.Views;
+package com.dacodes.venadostest.Views.Adapters;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,20 +11,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dacodes.venadostest.R;
-import com.dacodes.venadostest.Views.Models.Players.GoalKeeper;
+import com.dacodes.venadostest.Views.Models.Players.Center;
 import com.dacodes.venadostest.Views.Models.Players.Player;
 import com.dacodes.venadostest.Views.Models.Players.Team;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayerDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Miscellanius.PicassoCircleTransformation;
 import com.squareup.picasso.Picasso;
 
-public class GoalKeeperAdapter extends BaseAdapter {
+public class CentersAdapter extends BaseAdapter {
     private Context context;
     private Team team;
     private FragmentManager f;
     private static final String PLAYER_ID = "PLAYER_ID";
 
-    public GoalKeeperAdapter(Context context, Team t, FragmentManager fm) {
+    public CentersAdapter(Context context, Team t, FragmentManager fm) {
         this.context = context;
         this.team = t;
         this.f = fm;
@@ -32,12 +32,12 @@ public class GoalKeeperAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return team.getGoalKeepers().size();
+        return team.getCenters().size();
     }
 
     @Override
-    public GoalKeeper getItem(int i) {
-        return  team.getGoalKeepers().get(i);
+    public Center getItem(int i) {
+        return  team.getCenters().get(i);
 
     }
 
@@ -57,7 +57,7 @@ public class GoalKeeperAdapter extends BaseAdapter {
         ImageView imagePlayer = (ImageView) view.findViewById(R.id.Player_image);
         TextView positionPlayer = (TextView) view.findViewById(R.id.Player_Position);
         TextView namePlayer = (TextView) view.findViewById(R.id.Player_Name);
-           final GoalKeeper item = getItem(i);
+           final Center item = getItem(i);
             Picasso.get().load(item.getUrlImage())
                     .placeholder(R.mipmap.icon_launcher)
                     .error(R.mipmap.icon_launcher)

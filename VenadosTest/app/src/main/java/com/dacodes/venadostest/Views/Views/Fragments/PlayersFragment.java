@@ -6,35 +6,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.dacodes.venadostest.R;
-import com.dacodes.venadostest.Views.CentersAdapter;
-import com.dacodes.venadostest.Views.DefensesAdapter;
-import com.dacodes.venadostest.Views.DtAdapter;
-import com.dacodes.venadostest.Views.ForwardsAdapter;
-import com.dacodes.venadostest.Views.GoalKeeperAdapter;
-import com.dacodes.venadostest.Views.IO.VenadosApiAdapter;
-import com.dacodes.venadostest.Views.Models.Players.Coach;
-import com.dacodes.venadostest.Views.Models.Players.Forward;
-import com.dacodes.venadostest.Views.Models.Players.Player;
-import com.dacodes.venadostest.Views.Models.Players.PlayerResponse;
+import com.dacodes.venadostest.Views.Adapters.CentersAdapter;
+import com.dacodes.venadostest.Views.Adapters.DefensesAdapter;
+import com.dacodes.venadostest.Views.Adapters.DtAdapter;
+import com.dacodes.venadostest.Views.Adapters.ForwardsAdapter;
+import com.dacodes.venadostest.Views.Adapters.GoalKeeperAdapter;
 import com.dacodes.venadostest.Views.Models.Players.Team;
-import com.dacodes.venadostest.Views.PlayersAdapter;
-
-import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.

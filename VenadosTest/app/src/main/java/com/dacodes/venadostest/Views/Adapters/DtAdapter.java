@@ -1,4 +1,4 @@
-package com.dacodes.venadostest.Views;
+package com.dacodes.venadostest.Views.Adapters;
 
 import android.support.v4.app.FragmentManager;
 import android.content.Context;

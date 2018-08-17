@@ -25,6 +25,7 @@ import com.dacodes.venadostest.Views.Models.Statistics.StatisticsResponse;
 import com.dacodes.venadostest.Views.Views.Fragments.CoachDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayerDetailsFragment;
 import com.dacodes.venadostest.Views.Views.Fragments.PlayersFragment;
+import com.dacodes.venadostest.Views.Views.Fragments.StatisticsFragment;
 
 import java.util.ArrayList;
 
@@ -34,7 +35,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, PlayersFragment.OnFragmentInteractionListener,
-        PlayerDetailsFragment.OnFragmentInteractionListener, CoachDetailsFragment.OnFragmentInteractionListener{
+        PlayerDetailsFragment.OnFragmentInteractionListener, CoachDetailsFragment.OnFragmentInteractionListener,
+        StatisticsFragment.OnFragmentInteractionListener{
     Toolbar toolbar;
     Bundle bundle = new Bundle();
     private static final String TEAM_ID = "Team_ID";
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity
     private static final String CASO_ID = "Caso_ID";
 
     Team team = new Team();
-    ArrayList<Statistic> statistics;
+    DataStatistics dataStatistics = new DataStatistics();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if(savedInstanceState == null)
@@ -76,8 +78,8 @@ public class MainActivity extends AppCompatActivity
 
                     }else if(response.body() != null)
                     {
-                       statistics = response.body().getData().getStatistics();
-                        Log.d("RETFIT", statistics.get(1).getTeam());
+                        dataStatistics = response.body().getData();
+                        Log.d("RETFIT", dataStatistics.getStatistics().get(1).getTeam());
 
                     }
                 }
@@ -91,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         }else
         {
             team = (Team)savedInstanceState.getSerializable(TEAM_ID);
-            statistics = (ArrayList)savedInstanceState.getSerializable(STATISTICS_ID);
+            dataStatistics = (DataStatistics) savedInstanceState.getSerializable(STATISTICS_ID);
         }
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
@@ -152,7 +154,9 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.home) {
             // Handle the camera action
         } else if (id == R.id.statistics) {
+            bundle.putSerializable(STATISTICS_ID, dataStatistics);
             toolbar.setTitle(R.string.statistics_item);
+            setFragment(1, bundle);
         } else if (id == R.id.players)
         {
             bundle.putSerializable(TEAM_ID, team);
@@ -178,11 +182,11 @@ public class MainActivity extends AppCompatActivity
                 //fragmentTransaction.commit();
                 break;
             case 1:
-                //fragmentManager = getSupportFragmentManager();
-                //fragmentTransaction = fragmentManager.beginTransaction();
-                //StarredFragment starredFragment = new StarredFragment();
-                //fragmentTransaction.replace(R.id.fragment, starredFragment);
-                //fragmentTransaction.commit();
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+                StatisticsFragment statisticsFragment = StatisticsFragment.newInstance(args);
+                fragmentTransaction.replace(R.id.content_fragment, statisticsFragment);
+                fragmentTransaction.commit();
                 break;
             case 2:
                 fragmentManager = getSupportFragmentManager();
@@ -199,14 +203,14 @@ public class MainActivity extends AppCompatActivity
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable(TEAM_ID, team);
-        outState.putSerializable(STATISTICS_ID,statistics);
+        outState.putSerializable(STATISTICS_ID,dataStatistics);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         team = (Team)savedInstanceState.getSerializable(TEAM_ID);
-        statistics = (ArrayList)savedInstanceState.getSerializable(STATISTICS_ID);
+        dataStatistics = (DataStatistics) savedInstanceState.getSerializable(STATISTICS_ID);
     }
 
     @Override
