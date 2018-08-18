@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity
                     {
                         Log.d("RETFIT", response.body().getData().getGames().get(1).getDateReformated());
                         dataGames = response.body().getData();
+                        bundle.putSerializable(GaMES_ID,dataGames);
+                        setFragment(0,bundle);
                     }
                 }
 
@@ -124,6 +126,7 @@ public class MainActivity extends AppCompatActivity
             team = (Team)savedInstanceState.getSerializable(TEAM_ID);
             dataStatistics = (DataStatistics) savedInstanceState.getSerializable(STATISTICS_ID);
         }
+
         setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
