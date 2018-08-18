@@ -117,23 +117,24 @@ public class GamesRVAdapter extends RecyclerView.Adapter<GamesRVAdapter.GamesVie
 
     private void addEventToCalendar(Date d){
         android.icu.util.Calendar cal = android.icu.util.Calendar.getInstance();
+        cal.setTime(d);
 
-        cal.set(android.icu.util.Calendar.DAY_OF_MONTH, d.getDay());
-        cal.set(android.icu.util.Calendar.MONTH, d.getMonth());
-        cal.set(android.icu.util.Calendar.YEAR, d.getYear());
-
-        cal.set(android.icu.util.Calendar.HOUR_OF_DAY, d.getHours());
-        cal.set(android.icu.util.Calendar.MINUTE, d.getMinutes());
+        //cal.set(android.icu.util.Calendar.DAY_OF_MONTH, d.getDay());
+        //cal.set(android.icu.util.Calendar.MONTH, d.getMonth());
+        //cal.set(android.icu.util.Calendar.YEAR, d.getYear());
+//
+        //cal.set(android.icu.util.Calendar.HOUR_OF_DAY, d.getHours());
+        //cal.set(android.icu.util.Calendar.MINUTE, d.getMinutes());
 
         Intent intent = new Intent(Intent.ACTION_EDIT);
         intent.setType("vnd.android.cursor.item/event");
 
         intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, cal.getTimeInMillis());
-        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTimeInMillis()+60*60*1000);
+        intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, cal.getTimeInMillis()+90*60*1000);
 
         intent.putExtra(CalendarContract.Events.ALL_DAY, false);
         intent.putExtra(CalendarContract.Events.RRULE , "FRE");
-        intent.putExtra(CalendarContract.Events.TITLE, "Partido de Venados FC");
+        intent.putExtra(CalendarContract.Events.TITLE, "Partido de Venados FC VS");
         intent.putExtra(CalendarContract.Events.DESCRIPTION, "Descripción");
 
 
